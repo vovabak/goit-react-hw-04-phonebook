@@ -9,17 +9,9 @@ import { Container } from './App.styled';
 const LS_KEY = 'MyContacts';
 
 export const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(() => JSON.parse(localStorage.getItem(LS_KEY)) ?? [] );
   const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    const contacts = JSON.parse(localStorage.getItem(LS_KEY));
-    
-    if (contacts) {
-      setContacts(contacts)
-    }
-  }, [])
-
+  
   useEffect(() => {
     const savedContacts = JSON.stringify(contacts);    
     
